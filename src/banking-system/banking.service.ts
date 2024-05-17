@@ -10,9 +10,14 @@ import { BankAccountDto, CreateBankAccountDto } from 'src/dtos/bank-account.dto'
 import { OpenExchangeRates } from 'open-exchange-rates';
 import axios from 'axios';
 
+const ratesApiUrl='https://openexchangerates.org/api/latest.json?app_id=f9c7dde9fab04083a189b92f7bd91fb3';
+
+
 @Injectable()
+
 export class BankingService {
     private readonly openExchangeRates: OpenExchangeRates;
+    
 
     constructor(
         @InjectRepository(Bank)
@@ -141,7 +146,7 @@ export class BankingService {
     ///exchnage rates
     async getRates() {
 
-        const rates = await axios.get('https://openexchangerates.org/api/latest.json?app_id=f9c7dde9fab04083a189b92f7bd91fb3')
+        const rates = await axios.get(ratesApiUrl)
 
         if (!rates) {
 
